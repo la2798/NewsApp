@@ -5,6 +5,7 @@ public class NewsData {
     private String mTitle;
     private String mDate;
     private String mUrl;
+    private String mAuthor=null;
     public String getmSection() {
         return mSection;
     }
@@ -17,10 +18,20 @@ public class NewsData {
     public String getmUrl() {
         return mUrl;
     }
+    public String getmAuthor() {
+        return mAuthor;
+    }
     public NewsData(String section, String title, String date, String url){
         mSection = section;
         mTitle = title;
         mDate = date;
         mUrl = url;
+    }
+    public NewsData(String section, String title, String author, String date, String url){
+        mSection = section;
+        mTitle = title;
+        mDate = date;
+        mUrl = url;
+        mAuthor = author;
     }
 }

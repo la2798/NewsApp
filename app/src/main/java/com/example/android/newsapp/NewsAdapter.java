@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import java.util.ArrayList;
 
+import static android.view.View.GONE;
+
 public class NewsAdapter extends ArrayAdapter<NewsData> {
     private static final String DATE_SEPARATOR = "T";
     public NewsAdapter(@NonNull Context context, ArrayList<NewsData> objects) {
@@ -40,6 +42,14 @@ public class NewsAdapter extends ArrayAdapter<NewsData> {
         dateView.setText(date);
         TextView timeView = listItemView.findViewById(R.id.time);
         timeView.setText(time);
+        String author = data.getmAuthor();
+        TextView authorView = listItemView.findViewById(R.id.author);
+        if(author==null){
+            authorView.setVisibility(GONE);
+        }
+        else{
+            authorView.setText(author);
+        }
         return listItemView;
     }
 }

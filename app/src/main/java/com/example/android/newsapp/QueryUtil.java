@@ -75,6 +75,7 @@ public final class QueryUtil {
             return null;
         }
         List<NewsData> newsList = new ArrayList<>();
+        NewsData news;
         try {
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
             JSONObject newsObject = baseJsonResponse.getJSONObject("response");
@@ -85,7 +86,18 @@ public final class QueryUtil {
                 String title = currentNews.getString("webTitle");
                 String date = currentNews.getString("webPublicationDate");
                 String url = currentNews.getString("webUrl");
-                NewsData news = new NewsData( section,title, date, url);
+                String author = null;
+                JSONArray authorDetails = currentNews.getJSONArray("tags");
+                for(int j=0;j<authorDetails.length();j++){
+                    JSONObject authorObj = authorDetails.getJSONObject(j);
+                    author = authorObj.getString("webTitle");
+                }
+                if(author != null){
+                    news = new NewsData(section,title,author,date,url);
+                }
+                else {
+                    news = new NewsData(section, title, date, url);
+                }
                 newsList.add(news);
             }
         } catch (JSONException e) {
